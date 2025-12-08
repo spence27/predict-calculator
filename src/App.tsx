@@ -397,17 +397,23 @@ function ResultScreen({
           <div>
             <div className="title">Thanks for your interest</div>
             <p className="subtitle">
-              You do not have enough contacts to score and create an active lead funnel.
+              Unfortunately you have too few contacts to deliver a high amount of quality leads each
+              month, but we can help you build your database.
             </p>
           </div>
-          <span className="pill">Under 500 contacts</span>
+          <span className="pill">500 contacts or fewer</span>
         </div>
         <p className="subtitle">
-          However, we can help you generate new leads from people currently shopping for a home.
+          Click below to learn more about our database building services.
         </p>
         <div className="actions">
-          <a className="button primary" href="https://www.lendware.ai" target="_blank" rel="noreferrer">
-            Generate New Leads
+          <a
+            className="button primary"
+            href="https://calendly.com/lendware/database-building"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Learn More
           </a>
           <button type="button" className="button ghost" onClick={onBack}>
             ← Back

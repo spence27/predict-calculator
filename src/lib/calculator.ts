@@ -27,7 +27,7 @@ export const MIN_BPS = 0;
 export const MAX_BPS = 500;
 
 export function getPlan(contacts: number): Plan {
-  if (contacts < 500) {
+  if (contacts <= 500) {
     return {
       tier: '<500',
       leadsPerDay: 0,
