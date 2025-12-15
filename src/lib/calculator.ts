@@ -1,10 +1,16 @@
-export type PlanTier = '<500' | '500-999' | '1000-4999' | '5000+';
+export type PlanTier =
+  | '<=500'
+  | '500-1000'
+  | '1000-2500'
+  | '2500-5000'
+  | '5000+';
 
 export type Plan = {
   tier: PlanTier;
   leadsPerDay: number;
   price: number;
   eligible: boolean;
+  conversionRate: number;
   message?: string;
 };
 
@@ -29,29 +35,33 @@ export const MAX_BPS = 500;
 export function getPlan(contacts: number): Plan {
   if (contacts <= 500) {
     return {
-      tier: '<500',
+      tier: '<=500',
       leadsPerDay: 0,
       price: 0,
       eligible: false,
+      conversionRate: 0,
       message:
         'Thanks for your interest. You do not have enough contacts to score and create an active lead funnel.'
     };
   }
 
-  if (contacts < 1_000) {
-    return { tier: '500-999', leadsPerDay: 2, price: 250, eligible: true };
+  if (contacts <= 1_000) {
+    return { tier: '500-1000', leadsPerDay: 2, price: 250, eligible: true, conversionRate: 0.5 };
   }
 
-  if (contacts < 5_000) {
-    return { tier: '1000-4999', leadsPerDay: 3, price: 350, eligible: true };
+  if (contacts <= 2_500) {
+    return { tier: '1000-2500', leadsPerDay: 2, price: 350, eligible: true, conversionRate: 0.7 };
   }
 
-  return { tier: '5000+', leadsPerDay: 5, price: 450, eligible: true };
+  if (contacts <= 5_000) {
+    return { tier: '2500-5000', leadsPerDay: 3, price: 350, eligible: true, conversionRate: 0.7 };
+  }
+
+  return { tier: '5000+', leadsPerDay: 4, price: 450, eligible: true, conversionRate: 0.7 };
 }
 
-export function loansPerMonth(leadsPerDay: number): number {
-  // Base conversion is 0.75 loans per lead/day, then reduced by half per request.
-  return round(leadsPerDay * 0.75 * 0.5, 2);
+export function loansPerMonth(leadsPerDay: number, conversionRate: number): number {
+  return round(leadsPerDay * conversionRate, 2);
 }
 
 export function monthlyRevenue(loans: number, loanSize: number, bps: number): number {
@@ -67,7 +77,7 @@ export function roiPercentage(monthlyRevenueValue: number, monthlyPrice: number)
 
 export function calculateOutputs(inputs: CalculatorInputs): CalculatorResult {
   const plan = getPlan(inputs.contacts);
-  const loans = loansPerMonth(plan.leadsPerDay);
+  const loans = loansPerMonth(plan.leadsPerDay, plan.conversionRate);
   const revenue = monthlyRevenue(loans, inputs.loanSize, inputs.bps);
   const roi = roiPercentage(revenue, plan.price);
 
