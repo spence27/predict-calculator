@@ -396,30 +396,22 @@ function ResultScreen({
         <div className="result-header">
           <div>
             <div className="title">Thanks for your interest</div>
-            <p className="subtitle">
-              Unfortunately you have too few contacts to deliver a high amount of quality leads each
-              month, but we can help you build your database.
-            </p>
+            {planMessage && <p className="subtitle">{planMessage}</p>}
           </div>
-          <span className="pill">500 contacts or fewer</span>
         </div>
-        <p className="subtitle">
-          Click below to learn more about our database building services.
-        </p>
         <div className="actions">
           <a
             className="button primary"
-            href="https://calendly.com/lendware/database-building"
+            href="https://calendly.com/lendware"
             target="_blank"
             rel="noreferrer"
           >
-            Learn More
+            Book a Call
           </a>
           <button type="button" className="button ghost" onClick={onBack}>
             ← Back
           </button>
         </div>
-        {planMessage ? <p className="small">{planMessage}</p> : null}
       </div>
     );
   }
