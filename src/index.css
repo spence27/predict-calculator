@@ -324,6 +324,38 @@ body {
   }
 }
 
+.loss-hero-metric {
+  text-align: center;
+  margin-top: 24px;
+  padding: 28px 20px;
+  background: #fef2f2;
+  border: 2px solid #fecaca;
+  border-radius: 16px;
+}
+
+.loss-hero-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #991b1b;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.loss-hero-value {
+  font-size: 48px;
+  font-weight: 800;
+  color: #dc2626;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .loss-hero-value {
+    font-size: 56px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

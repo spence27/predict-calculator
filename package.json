@@ -14,7 +14,8 @@
     "framer-motion": "^11.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-number-format": "^5.4.1"
+    "react-number-format": "^5.4.1",
+    "react-router-dom": "^7.13.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
@@ -29,4 +30,3 @@
     "vitest": "^2.0.5"
   }
 }
-
